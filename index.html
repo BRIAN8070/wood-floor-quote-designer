@@ -7,27 +7,30 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
         :root {
-            --ink: #233242;
-            --muted: #6f7d87;
-            --paper: rgba(255, 251, 246, 0.92);
-            --line: rgba(109, 95, 78, 0.14);
-            --owner: #26313b;
-            --designer: #cb4f34;
+            --ink: #213141;
+            --muted: #6e7b85;
+            --paper: rgba(255, 252, 247, 0.94);
+            --line: rgba(88, 73, 56, 0.14);
+            --owner: #23303b;
+            --designer: #c45236;
             --berry: #2f5d8a;
             --egger: #b33a32;
             --noda: #2f7a4f;
+            --gold: #c6a164;
+            --gold-soft: #eed8ab;
+            --shadow: 0 24px 48px rgba(56, 46, 34, 0.12);
         }
         * { box-sizing: border-box; }
         body {
             font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
             color: var(--ink);
             margin: 0;
-            padding: 18px 14px 56px;
+            padding: 24px 16px 64px;
             min-height: 100vh;
             background:
-                radial-gradient(circle at top left, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 34%),
-                radial-gradient(circle at top right, rgba(176,138,88,0.12) 0%, rgba(176,138,88,0) 20%),
-                linear-gradient(180deg, #f7f2ea 0%, #eee8de 48%, #f5f0e8 100%);
+                radial-gradient(circle at top left, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0) 32%),
+                radial-gradient(circle at top right, rgba(180,144,93,0.12) 0%, rgba(180,144,93,0) 24%),
+                linear-gradient(180deg, #f4eee5 0%, #ece4d8 52%, #f5efe7 100%);
         }
         body::before {
             content: "";
@@ -35,13 +38,21 @@
             inset: 0;
             pointer-events: none;
             background-image:
-                linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
-            background-size: 36px 36px;
-            opacity: 0.22;
+                linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+            background-size: 42px 42px;
+            opacity: 0.18;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, rgba(33,49,65,0.03), rgba(33,49,65,0) 18%, rgba(33,49,65,0) 82%, rgba(33,49,65,0.03));
         }
         .container {
-            max-width: 920px;
+            max-width: 1040px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -49,60 +60,61 @@
         .header {
             position: relative;
             overflow: hidden;
-            margin-bottom: 22px;
-            padding: 28px 24px 22px;
-            border-radius: 28px;
+            margin-bottom: 26px;
+            padding: 32px 30px 26px;
+            border-radius: 34px;
             color: #fff;
             background:
-                linear-gradient(145deg, rgba(27, 41, 58, 0.96), rgba(42, 58, 75, 0.94)),
+                linear-gradient(148deg, rgba(18, 28, 39, 0.98), rgba(34, 48, 63, 0.95) 52%, rgba(24, 34, 46, 0.98)),
                 linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
-            border: 1px solid rgba(255,255,255,0.12);
-            box-shadow: 0 26px 50px rgba(30, 38, 47, 0.18);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 30px 60px rgba(24, 31, 40, 0.24);
+        }
+        .header::before {
+            content: "";
+            position: absolute;
+            right: -48px;
+            top: -44px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(214,184,122,0.28), rgba(214,184,122,0) 68%);
         }
         .header::after {
             content: "";
             position: absolute;
-            inset: auto auto 0 24px;
-            width: 108px;
+            inset: auto auto 0 30px;
+            width: 140px;
             height: 4px;
             border-radius: 999px;
-            background: linear-gradient(90deg, #d4ae69, #f6d79d);
+            background: linear-gradient(90deg, var(--gold), var(--gold-soft));
+        }
+        .header-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.85fr);
+            gap: 22px;
+            align-items: stretch;
         }
         .hero-eyebrow {
             margin: 0 0 8px;
             font-size: 0.74rem;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.72);
+            color: rgba(255,255,255,0.68);
         }
         .hero-title {
             margin: 0;
             font-family: "Georgia", "Times New Roman", serif;
-            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-            line-height: 1.08;
-            letter-spacing: 0.02em;
+            font-size: clamp(2rem, 3.8vw, 3.1rem);
+            line-height: 1.02;
+            letter-spacing: 0.03em;
         }
         .hero-subtitle {
-            margin: 12px 0 0;
-            max-width: 620px;
+            margin: 14px 0 0;
+            max-width: 640px;
             font-size: 0.96rem;
             line-height: 1.7;
-            color: rgba(255,255,255,0.8);
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 16px;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.12);
-            border: 1px solid rgba(255,255,255,0.18);
-            color: #fff;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            backdrop-filter: blur(8px);
+            color: rgba(255,255,255,0.78);
         }
         .hero-meta,
         .hero-legend {
@@ -121,13 +133,23 @@
             min-height: 38px;
             padding: 8px 12px;
             border-radius: 999px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: rgba(255,255,255,0.88);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.9);
             font-size: 0.82rem;
         }
         .hero-legend {
             margin-top: 12px;
+        }
+        .hero-ribbon {
+            margin-top: 18px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: linear-gradient(90deg, rgba(198,161,100,0.2), rgba(198,161,100,0.08));
+            border: 1px solid rgba(198,161,100,0.26);
+            color: rgba(255,255,255,0.88);
+            font-size: 0.88rem;
+            line-height: 1.65;
         }
         .legend-dot {
             width: 10px;
@@ -136,16 +158,100 @@
             flex: 0 0 auto;
         }
         .owner-dot { background: #f3f4f6; }
-        .designer-dot { background: #ff8a6b; }
+        .designer-dot { background: #ff8d6f; }
+        .hero-board {
+            position: relative;
+            padding: 18px;
+            border-radius: 24px;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+                linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+        }
+        .board-kicker {
+            margin: 0 0 10px;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.64);
+        }
+        .board-title {
+            margin: 0 0 16px;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.08rem;
+            letter-spacing: 0.04em;
+            color: rgba(255,255,255,0.94);
+        }
+        .swatch-grid {
+            display: grid;
+            gap: 12px;
+        }
+        .brand-swatch {
+            position: relative;
+            min-height: 96px;
+            padding: 16px 16px 14px;
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+        }
+        .brand-swatch::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.24;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.34), rgba(255,255,255,0) 42%),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.12) 2px, transparent 2px, transparent 18px);
+        }
+        .swatch-code {
+            position: absolute;
+            right: 14px;
+            top: 12px;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.68);
+        }
+        .brand-name,
+        .brand-caption {
+            position: relative;
+            z-index: 1;
+        }
+        .brand-name {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #fff;
+        }
+        .brand-caption {
+            margin-top: 4px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.78);
+        }
+        .swatch-berry {
+            background: linear-gradient(135deg, #456b94, #25486d 70%, #1d3651);
+        }
+        .swatch-egger {
+            background: linear-gradient(135deg, #c15b4d, #9d332b 68%, #7e221c);
+        }
+        .swatch-noda {
+            background: linear-gradient(135deg, #4a9064, #2f6d46 70%, #255235);
+        }
         .card {
             position: relative;
             overflow: hidden;
-            margin-bottom: 18px;
-            padding: 22px 20px 20px;
-            border-radius: 24px;
+            margin-bottom: 22px;
+            padding: 26px 24px 22px;
+            border-radius: 28px;
             background: var(--paper);
             border: 1px solid var(--line);
-            box-shadow: 0 18px 42px rgba(62, 53, 42, 0.08);
+            box-shadow: var(--shadow);
             backdrop-filter: blur(8px);
         }
         .card::before {
@@ -153,34 +259,111 @@
             position: absolute;
             inset: 0 0 auto;
             height: 6px;
-            background: var(--section-color);
+            background: linear-gradient(90deg, var(--section-color), rgba(255,255,255,0));
+        }
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 26px;
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.26), rgba(255,255,255,0));
+            pointer-events: none;
         }
         h2 {
-            margin: 0 0 14px;
-            font-size: 1.05rem;
-            line-height: 1.35;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .section-berry { --section-color: var(--berry); --section-tint: rgba(47, 93, 138, 0.06); --section-line: rgba(47, 93, 138, 0.16); }
+        .section-egger { --section-color: var(--egger); --section-tint: rgba(179, 58, 50, 0.06); --section-line: rgba(179, 58, 50, 0.16); }
+        .section-noda { --section-color: var(--noda); --section-tint: rgba(47, 122, 79, 0.06); --section-line: rgba(47, 122, 79, 0.16); }
+        .section-head {
+            display: grid;
+            grid-template-columns: 78px minmax(0, 1fr) auto;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(88, 73, 56, 0.12);
+        }
+        .section-index {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 78px;
+            height: 78px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, var(--section-color), rgba(32,47,62,0.94));
+            color: #fff;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.7rem;
+            letter-spacing: 0.08em;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.16);
+        }
+        .section-kicker {
+            margin: 0 0 6px;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--section-color);
         }
         .section-title {
+            display: block;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.38rem;
+            letter-spacing: 0.03em;
+            color: var(--ink);
+        }
+        .section-region {
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--section-color);
+            background: var(--section-tint);
+            border: 1px solid var(--section-line);
+        }
+        .section-summary {
+            margin: 0 0 16px;
+            max-width: 860px;
+            color: #50606f;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .section-bullets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 0 16px;
+        }
+        .bullet-chip {
             display: inline-flex;
             align-items: center;
-            min-height: 42px;
-            padding: 10px 16px;
+            gap: 8px;
+            min-height: 36px;
+            padding: 8px 12px;
             border-radius: 999px;
-            color: #fff;
-            font-weight: 700;
-            letter-spacing: 0.02em;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid var(--section-line);
+            color: #556473;
+            font-size: 0.82rem;
         }
-        .section-berry { --section-color: var(--berry); }
-        .section-egger { --section-color: var(--egger); }
-        .section-noda { --section-color: var(--noda); }
-        .section-berry .section-title { background: var(--berry); }
-        .section-egger .section-title { background: var(--egger); }
-        .section-noda .section-title { background: var(--noda); }
+        .bullet-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--section-color);
+            flex: 0 0 auto;
+        }
         table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
         }
         th, td {
             padding: 12px 10px;
@@ -188,7 +371,7 @@
             border-bottom: 1px solid rgba(117, 104, 88, 0.12);
         }
         th {
-            background: #f5f0e8;
+            background: #f3eee6;
             color: #6f6458;
             font-size: 0.76rem;
             letter-spacing: 0.08em;
@@ -220,11 +403,11 @@
             border: 1px solid rgba(117, 104, 88, 0.12);
         }
         .series-block {
-            margin-top: 14px;
-            padding: 16px;
-            border-radius: 18px;
-            border: 1px solid rgba(117, 104, 88, 0.12);
-            background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(247,243,236,0.94));
+            margin-top: 15px;
+            padding: 18px;
+            border-radius: 20px;
+            border: 1px solid var(--section-line);
+            background: linear-gradient(180deg, rgba(255,255,255,0.96), var(--section-tint));
         }
         .series-title {
             display: flex;
@@ -236,14 +419,14 @@
         .series-name {
             font-weight: 700;
             color: var(--ink);
-            font-size: 0.96rem;
+            font-size: 0.98rem;
             letter-spacing: 0.01em;
         }
         .series-price {
             padding: 6px 10px;
             border-radius: 999px;
-            background: rgba(255,255,255,0.8);
-            border: 1px solid rgba(117, 104, 88, 0.12);
+            background: rgba(255,255,255,0.82);
+            border: 1px solid var(--section-line);
             font-size: 0.78rem;
             color: #6f6458;
             text-align: right;
@@ -263,7 +446,7 @@
             padding: 10px 10px;
         }
         .detail-table th {
-            background: #f4eee5;
+            background: rgba(255,255,255,0.7);
             font-size: 0.72rem;
         }
         .detail-table tr:first-child th:first-child { border-top-left-radius: 12px; }
@@ -273,15 +456,155 @@
             font-weight: 700;
             color: #43515f;
         }
+        .insight-grid,
+        .policy-grid,
+        .cta-grid {
+            display: grid;
+            gap: 14px;
+        }
+        .insight-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin: 0 0 16px;
+        }
+        .policy-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            margin-top: 16px;
+        }
+        .cta-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 14px;
+        }
+        .insight-card,
+        .policy-card,
+        .cta-card {
+            padding: 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(88,73,56,0.12);
+            box-shadow: 0 12px 26px rgba(55, 46, 35, 0.06);
+        }
+        .insight-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.94), var(--section-tint));
+            border-color: var(--section-line);
+        }
+        .card-tag,
+        .policy-tag,
+        .cta-tag {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+        .card-tag {
+            color: var(--section-color);
+            background: rgba(255,255,255,0.84);
+            border: 1px solid var(--section-line);
+        }
+        .policy-tag,
+        .cta-tag {
+            color: #8e6d2d;
+            background: rgba(255,245,222,0.92);
+            border: 1px solid rgba(198,161,100,0.28);
+        }
+        .insight-title,
+        .policy-title,
+        .cta-title {
+            margin: 14px 0 8px;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.08rem;
+            letter-spacing: 0.02em;
+            color: var(--ink);
+        }
+        .insight-body,
+        .policy-body,
+        .cta-body {
+            margin: 0;
+            color: #586675;
+            font-size: 0.88rem;
+            line-height: 1.75;
+        }
+        .service-panel {
+            margin-top: 22px;
+            padding: 24px 22px 22px;
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(22,33,46,0.98), rgba(33,49,67,0.95));
+            color: #fff;
+            box-shadow: 0 26px 52px rgba(30,38,47,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        .service-panel::before {
+            content: "";
+            position: absolute;
+            inset: auto -40px -40px auto;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(198,161,100,0.18), rgba(198,161,100,0));
+        }
+        .service-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: end;
+            margin-bottom: 12px;
+        }
+        .service-title {
+            margin: 0;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+        .service-subtitle {
+            margin: 10px 0 0;
+            max-width: 720px;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.8;
+            font-size: 0.92rem;
+        }
+        .cta-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: none;
+        }
+        .cta-title,
+        .cta-body {
+            color: #fff;
+        }
+        .cta-body {
+            color: rgba(255,255,255,0.76);
+        }
+        .service-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 42px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(198,161,100,0.16);
+            border: 1px solid rgba(198,161,100,0.28);
+            color: #fff;
+            font-size: 0.9rem;
+        }
         .footer {
             position: relative;
             overflow: hidden;
             margin-top: 20px;
-            padding: 18px 18px 16px;
-            border-radius: 22px;
-            background: linear-gradient(135deg, #fbf4df, #f5e4b8);
-            border: 1px solid rgba(181, 144, 70, 0.28);
-            box-shadow: 0 16px 32px rgba(113, 92, 46, 0.08);
+            padding: 20px 20px 18px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #fcf5e4, #f3deb2);
+            border: 1px solid rgba(181, 144, 70, 0.26);
+            box-shadow: 0 18px 34px rgba(113, 92, 46, 0.08);
             font-size: 0.88rem;
             line-height: 1.75;
             color: #5b4b2f;
@@ -305,23 +628,45 @@
         .highlight { color: var(--designer); font-weight: 700; }
         @media (max-width: 768px) {
             body {
-                padding: 14px 12px 40px;
+                padding: 14px 12px 42px;
             }
             .header {
-                padding: 22px 18px 18px;
-                border-radius: 22px;
+                padding: 22px 18px 20px;
+                border-radius: 24px;
+            }
+            .header-grid {
+                grid-template-columns: 1fr;
             }
             .hero-subtitle {
                 font-size: 0.9rem;
             }
+            .hero-board {
+                padding: 16px;
+            }
+            .hero-ribbon {
+                font-size: 0.84rem;
+            }
             .card {
                 padding: 18px 14px 16px;
-                border-radius: 20px;
+                border-radius: 22px;
+            }
+            .section-head {
+                grid-template-columns: 62px 1fr;
+                align-items: start;
+            }
+            .section-index {
+                width: 62px;
+                height: 62px;
+                border-radius: 18px;
+                font-size: 1.4rem;
             }
             .section-title {
-                display: flex;
-                width: 100%;
-                justify-content: center;
+                font-size: 1.18rem;
+            }
+            .section-region {
+                grid-column: 1 / -1;
+                justify-self: start;
+                margin-left: 76px;
             }
             .series-title {
                 display: block;
@@ -330,6 +675,17 @@
                 margin-top: 8px;
                 text-align: left;
                 white-space: normal;
+            }
+            .insight-grid,
+            .policy-grid,
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-head {
+                display: block;
+            }
+            .service-title {
+                font-size: 1.28rem;
             }
             th, td {
                 padding: 10px 6px;
@@ -340,29 +696,61 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="row g-3 align-items-end">
-                <div class="col-lg-8">
-                    <p class="hero-eyebrow">Wood Flooring Quote Reference</p>
-                    <h1 class="hero-title">2026 木地板報價參照</h1>
-                    <p class="hero-subtitle">整理 BerryAlloc、EGGER、諾達與防水超耐磨無機板的設計師報價資訊，方便比價、對料與快速提供提案參考。</p>
+            <div class="header-grid">
+                <div>
+                    <p class="hero-eyebrow">Imported Interior Materials / 2026 Reference</p>
+                    <h1 class="hero-title">木地板進口建材型錄報價</h1>
+                    <p class="hero-subtitle">以進口建材型錄的方式整理 BerryAlloc、EGGER、諾達與防水超耐磨無機板的設計師報價資訊，方便提案、對料與報價比對時快速查閱。</p>
+                    <div class="hero-meta">
+                        <span class="meta-chip">連工帶料</span>
+                        <span class="meta-chip">未稅價格</span>
+                        <span class="meta-chip">2026 / 03 / 27 更新</span>
+                    </div>
+                    <div class="hero-legend">
+                        <span class="legend-chip"><span class="legend-dot owner-dot"></span>黑色為業主價</span>
+                        <span class="legend-chip"><span class="legend-dot designer-dot"></span>紅色為設計師價</span>
+                    </div>
+                    <div class="hero-ribbon">超耐磨防水系列 × 比利時木地板 × 諾達 × EGGER，整理專業設計師與業主專屬報價，並保留系列特色、材質定位與配件資訊，方便提案時直接作為型錄參照。</div>
                 </div>
-                <div class="col-lg-4 text-lg-end">
-                    <span class="hero-badge">Designer Edition</span>
+                <div class="hero-board">
+                    <p class="board-kicker">Material Portfolio</p>
+                    <p class="board-title">Selected Collections</p>
+                    <div class="swatch-grid">
+                        <div class="brand-swatch swatch-berry">
+                            <span class="swatch-code">01</span>
+                            <span class="brand-name">BerryAlloc</span>
+                            <span class="brand-caption">Belgium imported flooring collection</span>
+                        </div>
+                        <div class="brand-swatch swatch-egger">
+                            <span class="swatch-code">02</span>
+                            <span class="brand-name">EGGER</span>
+                            <span class="brand-caption">Germany aqua resistant laminate series</span>
+                        </div>
+                        <div class="brand-swatch swatch-noda">
+                            <span class="swatch-code">03</span>
+                            <span class="brand-name">Noda / IWF</span>
+                            <span class="brand-caption">Pattern flooring and inorganic board accessories</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-meta">
-                <span class="meta-chip">連工帶料</span>
-                <span class="meta-chip">未稅價格</span>
-                <span class="meta-chip">2026 / 03 / 27 更新</span>
-            </div>
-            <div class="hero-legend">
-                <span class="legend-chip"><span class="legend-dot owner-dot"></span>黑色為業主價</span>
-                <span class="legend-chip"><span class="legend-dot designer-dot"></span>紅色為設計師價</span>
             </div>
         </div>
 
         <div class="card section-berry">
-            <h2 class="section-title">1. 比利時 BerryAlloc 頂級系列</h2>
+            <div class="section-head">
+                <div class="section-index">01</div>
+                <div class="section-copy">
+                    <p class="section-kicker">Belgium Imported Collection</p>
+                    <h2 class="section-title">比利時 BerryAlloc 頂級系列</h2>
+                </div>
+                <div class="section-region">BerryAlloc</div>
+            </div>
+            <p class="section-summary">源自比利時的精品品質，3D 同步壓紋搭配 72 小時潑水測試認證，自然紋理更能呈現高端木質層次，適合重視空間質感與細節完成度的住宅與設計案。</p>
+            <div class="section-bullets">
+                <span class="bullet-chip"><span class="bullet-dot"></span>72 小時潑水測試</span>
+                <span class="bullet-chip"><span class="bullet-dot"></span>3D 同步壓紋</span>
+                <span class="bullet-chip"><span class="bullet-dot"></span>自然木感紋理</span>
+            </div>
             <table>
                 <tr><th>系列 / 規格</th><th>業主價</th><th>設計師</th></tr>
                 <tr><td>活力精選<span class="spec">1261*192*8</span></td><td class="owner">$4,800</td><td class="designer">$3,800</td></tr>
@@ -392,7 +780,32 @@
         </div>
 
         <div class="card section-egger">
-            <h2 class="section-title">2. 德國 EGGER 耐磨系列</h2>
+            <div class="section-head">
+                <div class="section-index">02</div>
+                <div class="section-copy">
+                    <p class="section-kicker">German Interior Surface System</p>
+                    <h2 class="section-title">德國 EGGER 耐磨系列</h2>
+                </div>
+                <div class="section-region">EGGER</div>
+            </div>
+            <p class="section-summary">德國 EGGER 以嚴謹工藝打造多款木紋色系，Aqua 系列提供防水升級，LARGE / LONG 格式展現大板氣勢，Aqua+ 系列更進一步對應高濕環境需求，是商空與住宅提案都很穩定的系列。</p>
+            <div class="insight-grid">
+                <div class="insight-card">
+                    <span class="card-tag">Aqua</span>
+                    <h3 class="insight-title">標準防水核心</h3>
+                    <p class="insight-body">超耐磨防水核心，適合一般居家與商業空間，提供多元色系與穩定施工性。</p>
+                </div>
+                <div class="insight-card">
+                    <span class="card-tag">Large / Long</span>
+                    <h3 class="insight-title">大板與長板比例</h3>
+                    <p class="insight-body">更寬更長的板材比例，視覺延伸效果更強，適合大坪數空間與開放式格局。</p>
+                </div>
+                <div class="insight-card">
+                    <span class="card-tag">Aqua+</span>
+                    <h3 class="insight-title">進階防水定位</h3>
+                    <p class="insight-body">加強防水配方，適合浴廁過渡區與較潮濕環境，兼顧功能與質感。</p>
+                </div>
+            </div>
             <div class="series-block">
                 <div class="series-title">
                     <div class="series-name">8/32 - 8/33 入門防水系列</div>
@@ -493,7 +906,20 @@
         </div>
 
         <div class="card section-noda">
-            <h2 class="section-title">3. 諾達地板與防水超耐磨無機板</h2>
+            <div class="section-head">
+                <div class="section-index">03</div>
+                <div class="section-copy">
+                    <p class="section-kicker">Pattern Flooring & Inorganic Board</p>
+                    <h2 class="section-title">諾達地板與防水超耐磨無機板</h2>
+                </div>
+                <div class="section-region">Noda / IWF</div>
+            </div>
+            <p class="section-summary">諾達以多元鋪設工法著稱，典韻系列寬板大氣、人字拼系列視覺層次豐富；IWF / MFB 防水超耐磨無機板則結合防水核心技術與耐磨表層，對台灣潮濕氣候與翻修案都相當友善。</p>
+            <div class="section-bullets">
+                <span class="bullet-chip"><span class="bullet-dot"></span>個性化鋪設工法</span>
+                <span class="bullet-chip"><span class="bullet-dot"></span>寬板與人字拼選擇</span>
+                <span class="bullet-chip"><span class="bullet-dot"></span>高 CP 值防水方案</span>
+            </div>
 
             <div class="series-block">
                 <div class="series-title">
@@ -543,6 +969,59 @@
                         <td class="designer">$500</td>
                     </tr>
                 </table>
+            </div>
+        </div>
+
+        <div class="service-panel">
+            <div class="service-head">
+                <div>
+                    <p class="board-kicker">Designer Advantage</p>
+                    <h2 class="service-title">設計師專屬優惠與服務說明</h2>
+                    <p class="service-subtitle">根據簡報內容，設計師價通常相較業主價可節省約 15% - 20%，並支援純材料或連工帶料兩種採購模式，方便依不同案場需求靈活搭配。</p>
+                </div>
+            </div>
+            <div class="policy-grid">
+                <div class="policy-card">
+                    <span class="policy-tag">Saving</span>
+                    <h3 class="policy-title">設計師優惠幅度</h3>
+                    <p class="policy-body">所有系列均提供設計師專屬優惠價，相較業主價通常可節省約 15% - 20%，適合搭配工程採購。</p>
+                </div>
+                <div class="policy-card">
+                    <span class="policy-tag">Purchase Mode</span>
+                    <h3 class="policy-title">採購方式彈性</h3>
+                    <p class="policy-body">支援純材料或連工帶料兩種模式，能依工班配置、案場時程與預算彈性調整。</p>
+                </div>
+                <div class="policy-card">
+                    <span class="policy-tag">Tax</span>
+                    <h3 class="policy-title">報價均為未稅</h3>
+                    <p class="policy-body">所有價格皆為未稅前價格，若有開立發票或稅務需求，需再依實際情況另行加計。</p>
+                </div>
+                <div class="policy-card">
+                    <span class="policy-tag">Accessory</span>
+                    <h3 class="policy-title">配件另計</h3>
+                    <p class="policy-body">起步條、分隔條、樓梯收邊條等配件皆可另計，並保有設計師優惠條件，方便拆分報價。</p>
+                </div>
+            </div>
+            <div class="cta-grid">
+                <div class="cta-card">
+                    <span class="cta-tag">Measure</span>
+                    <h3 class="cta-title">免費丈量</h3>
+                    <p class="cta-body">到府或線上提供空間估算服務，協助前期選材與坪數概算。</p>
+                </div>
+                <div class="cta-card">
+                    <span class="cta-tag">Designer Plan</span>
+                    <h3 class="cta-title">設計師專案折扣</h3>
+                    <p class="cta-body">長期合作或多案量採購，可依合作模式另談更完整的優惠方案。</p>
+                </div>
+                <div class="cta-card">
+                    <span class="cta-tag">Sample</span>
+                    <h3 class="cta-title">樣品索取</h3>
+                    <p class="cta-body">提供系列實體樣品，方便提案會議與現場比對材色、紋理與拼接效果。</p>
+                </div>
+            </div>
+            <div class="service-contact">
+                <span class="contact-pill">可攜平面圖快速估算</span>
+                <span class="contact-pill">歡迎洽詢設計師專案報價</span>
             </div>
         </div>
 
