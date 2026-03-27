@@ -4,47 +4,365 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 木地板專業報價參照表</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
-        :root { --main: #2c3e50; --price: #e74c3c; --bg: #f4f7f6; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); margin: 0; padding: 12px; color: #333; }
-        .container { max-width: 500px; margin: 0 auto; }
-        .header { text-align: center; background: var(--main); color: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .card { background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 12px; }
-        h2 { font-size: 1.05rem; margin: 0 0 10px 0; border-left: 4px solid var(--main); padding-left: 8px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th, td { border: 1px solid #eee; padding: 10px 4px; text-align: center; }
-        th { background: #f8f9fa; color: #666; }
-        .owner { font-weight: 700; color: #333; }
-        .designer { color: var(--price); font-weight: 700; }
-        .spec { font-size: 0.75rem; color: #888; display: block; }
-        .tag-box { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
-        .tag { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; color: #666; }
-        .series-block { border: 1px solid #e9ecef; border-radius: 8px; padding: 10px; margin-top: 10px; }
-        .series-title { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; margin-bottom: 8px; }
-        .series-name { font-weight: 700; color: var(--main); font-size: 0.9rem; }
-        .series-price { font-size: 0.78rem; color: #666; text-align: right; }
+        :root {
+            --ink: #233242;
+            --muted: #6f7d87;
+            --paper: rgba(255, 251, 246, 0.92);
+            --line: rgba(109, 95, 78, 0.14);
+            --owner: #26313b;
+            --designer: #cb4f34;
+            --berry: #2f5d8a;
+            --egger: #b33a32;
+            --noda: #2f7a4f;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            color: var(--ink);
+            margin: 0;
+            padding: 18px 14px 56px;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 34%),
+                radial-gradient(circle at top right, rgba(176,138,88,0.12) 0%, rgba(176,138,88,0) 20%),
+                linear-gradient(180deg, #f7f2ea 0%, #eee8de 48%, #f5f0e8 100%);
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
+            background-size: 36px 36px;
+            opacity: 0.22;
+        }
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .header {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 22px;
+            padding: 28px 24px 22px;
+            border-radius: 28px;
+            color: #fff;
+            background:
+                linear-gradient(145deg, rgba(27, 41, 58, 0.96), rgba(42, 58, 75, 0.94)),
+                linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 26px 50px rgba(30, 38, 47, 0.18);
+        }
+        .header::after {
+            content: "";
+            position: absolute;
+            inset: auto auto 0 24px;
+            width: 108px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #d4ae69, #f6d79d);
+        }
+        .hero-eyebrow {
+            margin: 0 0 8px;
+            font-size: 0.74rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.72);
+        }
+        .hero-title {
+            margin: 0;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+            line-height: 1.08;
+            letter-spacing: 0.02em;
+        }
+        .hero-subtitle {
+            margin: 12px 0 0;
+            max-width: 620px;
+            font-size: 0.96rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.8);
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            backdrop-filter: blur(8px);
+        }
+        .hero-meta,
+        .hero-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 12px;
+        }
+        .hero-meta {
+            margin-top: 18px;
+        }
+        .meta-chip,
+        .legend-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 38px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.88);
+            font-size: 0.82rem;
+        }
+        .hero-legend {
+            margin-top: 12px;
+        }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex: 0 0 auto;
+        }
+        .owner-dot { background: #f3f4f6; }
+        .designer-dot { background: #ff8a6b; }
+        .card {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 18px;
+            padding: 22px 20px 20px;
+            border-radius: 24px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            box-shadow: 0 18px 42px rgba(62, 53, 42, 0.08);
+            backdrop-filter: blur(8px);
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto;
+            height: 6px;
+            background: var(--section-color);
+        }
+        h2 {
+            margin: 0 0 14px;
+            font-size: 1.05rem;
+            line-height: 1.35;
+        }
+        .section-title {
+            display: inline-flex;
+            align-items: center;
+            min-height: 42px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .section-berry { --section-color: var(--berry); }
+        .section-egger { --section-color: var(--egger); }
+        .section-noda { --section-color: var(--noda); }
+        .section-berry .section-title { background: var(--berry); }
+        .section-egger .section-title { background: var(--egger); }
+        .section-noda .section-title { background: var(--noda); }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid rgba(117, 104, 88, 0.12);
+        }
+        th {
+            background: #f5f0e8;
+            color: #6f6458;
+            font-size: 0.76rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        table tr:first-child th:first-child { border-top-left-radius: 14px; }
+        table tr:first-child th:last-child { border-top-right-radius: 14px; }
+        table tr:last-child td { border-bottom: none; }
+        .owner { font-weight: 700; color: var(--owner); }
+        .designer { color: var(--designer); font-weight: 700; }
+        .spec {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.75rem;
+            color: #7c8791;
+        }
+        .tag-box {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .tag {
+            padding: 4px 8px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            color: #6f6458;
+            background: #f3ede3;
+            border: 1px solid rgba(117, 104, 88, 0.12);
+        }
+        .series-block {
+            margin-top: 14px;
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(117, 104, 88, 0.12);
+            background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(247,243,236,0.94));
+        }
+        .series-title {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .series-name {
+            font-weight: 700;
+            color: var(--ink);
+            font-size: 0.96rem;
+            letter-spacing: 0.01em;
+        }
+        .series-price {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(117, 104, 88, 0.12);
+            font-size: 0.78rem;
+            color: #6f6458;
+            text-align: right;
+            white-space: nowrap;
+        }
         .series-price .designer { font-size: 0.82rem; }
-        .detail-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
-        .detail-table th, .detail-table td { border: 1px solid #eee; padding: 8px 6px; text-align: left; vertical-align: top; }
-        .detail-table th { background: #f8f9fa; color: #666; }
-        .code { white-space: nowrap; font-weight: 700; color: #495057; }
-        .note { margin-top: 8px; font-size: 0.72rem; color: #6c757d; line-height: 1.5; }
-        .footer { background: #fff3cd; padding: 12px; border-radius: 8px; font-size: 0.8rem; border: 1px solid #ffeeba; }
-        .highlight { color: var(--price); font-weight: bold; }
-        @media (max-width: 576px) {
-            .series-title { display: block; }
-            .series-price { text-align: left; margin-top: 4px; }
+        .detail-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.82rem;
+        }
+        .detail-table th,
+        .detail-table td {
+            text-align: left;
+            vertical-align: top;
+            padding: 10px 10px;
+        }
+        .detail-table th {
+            background: #f4eee5;
+            font-size: 0.72rem;
+        }
+        .detail-table tr:first-child th:first-child { border-top-left-radius: 12px; }
+        .detail-table tr:first-child th:last-child { border-top-right-radius: 12px; }
+        .code {
+            white-space: nowrap;
+            font-weight: 700;
+            color: #43515f;
+        }
+        .footer {
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            padding: 18px 18px 16px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, #fbf4df, #f5e4b8);
+            border: 1px solid rgba(181, 144, 70, 0.28);
+            box-shadow: 0 16px 32px rgba(113, 92, 46, 0.08);
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: #5b4b2f;
+        }
+        .footer::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto auto 18px;
+            width: 96px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #c7922f, #f0c96c);
+        }
+        .footer-title {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.96rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .highlight { color: var(--designer); font-weight: 700; }
+        @media (max-width: 768px) {
+            body {
+                padding: 14px 12px 40px;
+            }
+            .header {
+                padding: 22px 18px 18px;
+                border-radius: 22px;
+            }
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            .card {
+                padding: 18px 14px 16px;
+                border-radius: 20px;
+            }
+            .section-title {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+            }
+            .series-title {
+                display: block;
+            }
+            .series-price {
+                margin-top: 8px;
+                text-align: left;
+                white-space: normal;
+            }
+            th, td {
+                padding: 10px 6px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1 style="font-size: 1.2rem; margin:0;">2026 木地板報價 (設計師版)</h1>
+            <div class="row g-3 align-items-end">
+                <div class="col-lg-8">
+                    <p class="hero-eyebrow">Wood Flooring Quote Reference</p>
+                    <h1 class="hero-title">2026 木地板報價參照</h1>
+                    <p class="hero-subtitle">整理 BerryAlloc、EGGER、諾達與防水超耐磨無機板的設計師報價資訊，方便比價、對料與快速提供提案參考。</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <span class="hero-badge">Designer Edition</span>
+                </div>
+            </div>
+            <div class="hero-meta">
+                <span class="meta-chip">連工帶料</span>
+                <span class="meta-chip">未稅價格</span>
+                <span class="meta-chip">2026 / 03 / 27 更新</span>
+            </div>
+            <div class="hero-legend">
+                <span class="legend-chip"><span class="legend-dot owner-dot"></span>黑色為業主價</span>
+                <span class="legend-chip"><span class="legend-dot designer-dot"></span>紅色為設計師價</span>
+            </div>
         </div>
 
-        <div class="card">
-            <h2>1. 比利時 BerryAlloc 頂級系列</h2>
+        <div class="card section-berry">
+            <h2 class="section-title">1. 比利時 BerryAlloc 頂級系列</h2>
             <table>
                 <tr><th>系列 / 規格</th><th>業主價</th><th>設計師</th></tr>
                 <tr><td>活力精選<span class="spec">1261*192*8</span></td><td class="owner">$4,800</td><td class="designer">$3,800</td></tr>
@@ -52,10 +370,29 @@
                 <tr><td>精品系列<span class="spec">1261*192*8</span></td><td class="owner">$5,400</td><td class="designer">$4,200</td></tr>
                 <tr><td>新寬板<span class="spec">1261*244*8</span></td><td class="owner">$5,600</td><td class="designer">$4,700</td></tr>
             </table>
+
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">比利時地板配件與靜音墊</div>
+                </div>
+                <table class="detail-table">
+                    <tr><th>項目</th><th>業主價</th><th>設計師價</th></tr>
+                    <tr>
+                        <td>3.6MM 英國靜音墊<span class="spec">3.03坪 / 捲</span></td>
+                        <td class="owner">$1,200</td>
+                        <td class="designer">$900</td>
+                    </tr>
+                    <tr>
+                        <td>原廠智慧條<span class="spec">2.15M / 支</span></td>
+                        <td class="owner">$900</td>
+                        <td class="designer">$800</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
-        <div class="card">
-            <h2>2. 德國 EGGER 耐磨系列</h2>
+        <div class="card section-egger">
+            <h2 class="section-title">2. 德國 EGGER 耐磨系列</h2>
             <div class="series-block">
                 <div class="series-title">
                     <div class="series-name">8/32 - 8/33 入門防水系列</div>
@@ -155,21 +492,65 @@
             </div>
         </div>
 
-        <div class="card">
-            <h2>3. 其他機能與輔料</h2>
-            <table>
-                <tr><td>IWF 防水超耐磨</td><td class="owner">$4,300</td><td class="designer">$3,500</td></tr>
-                <tr><td>諾達-人字拼系列</td><td class="owner">$6,800</td><td class="designer">$5,600</td></tr>
-                <tr><td>3.6mm 英國靜音墊</td><td class="owner">$1,200</td><td class="designer">$900</td></tr>
-                <tr><td>原廠智慧條 / 配件</td><td class="owner">$900</td><td class="designer">$800</td></tr>
-            </table>
+        <div class="card section-noda">
+            <h2 class="section-title">3. 諾達地板與防水超耐磨無機板</h2>
+
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">諾達地板系列</div>
+                </div>
+                <table class="detail-table">
+                    <tr><th>項目</th><th>業主價</th><th>設計師價</th></tr>
+                    <tr>
+                        <td>典韻系列 (A1501-A1512)<span class="spec">1515 * 238 * 8MM</span></td>
+                        <td class="owner">$3,900</td>
+                        <td class="designer">$3,300</td>
+                    </tr>
+                    <tr>
+                        <td>人字拼系列 (H201-H206)<span class="spec">593 * 123 * 8MM</span></td>
+                        <td class="owner">$6,800</td>
+                        <td class="designer">$5,600</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">諾達配件</div>
+                </div>
+                <table class="detail-table">
+                    <tr><th>項目</th><th>業主價</th><th>設計師價</th></tr>
+                    <tr><td>配件 - 起步條 / 分隔條</td><td class="owner">$800</td><td class="designer">$500</td></tr>
+                    <tr><td>配件 - 一字條</td><td class="owner">$800</td><td class="designer">$500</td></tr>
+                    <tr><td>配件 - 樓梯收邊條</td><td class="owner">$800</td><td class="designer">$500</td></tr>
+                </table>
+            </div>
+
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">防水超耐磨無機板</div>
+                </div>
+                <table class="detail-table">
+                    <tr><th>項目</th><th>業主價</th><th>設計師價</th></tr>
+                    <tr>
+                        <td>IWF / MFB 超耐磨防水木地板<span class="spec">1220 * 196 * 9.5MM</span></td>
+                        <td class="owner">$4,300</td>
+                        <td class="designer">$3,500</td>
+                    </tr>
+                    <tr>
+                        <td>配件 - 起步條 / 分隔條</td>
+                        <td class="owner">$800</td>
+                        <td class="designer">$500</td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div class="footer">
-            <strong>⚠️ 專業備註：</strong><br>
-            1. 以上單價均為<span class="highlight">連工帶料</span>，且<span class="highlight">不含 5% 營業稅</span> 。<br>
+            <span class="footer-title">專業備註</span>
+            1. 以上單價均為<span class="highlight">連工帶料</span>，且<span class="highlight">不含 5% 營業稅</span>。<br>
             2. 黑色為業主建議價，紅色為設計師專屬優惠價。<br>
-            3. 更新日期：2026/03/27 。
+            3. 更新日期：2026/03/27。
         </div>
     </div>
 </body>
