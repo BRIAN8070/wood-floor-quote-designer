@@ -436,6 +436,167 @@
             font-size: 0.95rem;
             line-height: 1.8;
         }
+        .brand-story-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+            gap: 14px;
+            margin: 0 0 16px;
+        }
+        .brand-story-grid.single-story {
+            grid-template-columns: minmax(0, 720px);
+            justify-content: center;
+        }
+        .brand-story-card {
+            padding: 16px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.96), var(--section-tint));
+            border: 1px solid var(--section-line);
+            box-shadow: 0 12px 26px rgba(55, 46, 35, 0.06);
+        }
+        .brand-story-card.centered-story {
+            text-align: center;
+        }
+        .brand-story-card.centered-story .brand-story-kicker {
+            margin: 0 auto;
+        }
+        .brand-story-card.centered-story .brand-story-title {
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .brand-story-card.centered-story .brand-story-body {
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .brand-story-kicker {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--section-color);
+            background: rgba(255,255,255,0.84);
+            border: 1px solid var(--section-line);
+        }
+        .brand-story-title {
+            margin: 14px 0 8px;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.08rem;
+            letter-spacing: 0.02em;
+            color: var(--ink);
+        }
+        .brand-story-body {
+            margin: 0;
+            color: #586675;
+            font-size: 0.88rem;
+            line-height: 1.75;
+        }
+        .brand-story-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            margin-top: 14px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            color: var(--section-color);
+            background: rgba(255,255,255,0.9);
+            border: 1px solid var(--section-line);
+            font-size: 0.84rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+        }
+        .brand-story-link:hover,
+        .brand-story-link:focus-visible {
+            transform: translateY(-1px);
+            border-color: rgba(47, 93, 138, 0.3);
+            box-shadow: 0 10px 24px rgba(47, 93, 138, 0.12);
+        }
+        .berry-series-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin: 0 0 16px;
+        }
+        .berry-series-card {
+            overflow: hidden;
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), var(--section-tint));
+            border: 1px solid var(--section-line);
+            box-shadow: 0 12px 26px rgba(55, 46, 35, 0.06);
+        }
+        .berry-series-media {
+            aspect-ratio: 16 / 9.2;
+            overflow: hidden;
+            background: #f4efe8;
+        }
+        .berry-series-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .berry-series-body {
+            padding: 16px;
+        }
+        .berry-series-label {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--section-color);
+            background: rgba(255,255,255,0.84);
+            border: 1px solid var(--section-line);
+        }
+        .berry-series-name {
+            margin: 12px 0 8px;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+            color: var(--ink);
+        }
+        .berry-series-spec {
+            margin: 0;
+            color: #586675;
+            font-size: 0.86rem;
+            line-height: 1.75;
+        }
+        .berry-series-prices {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .berry-series-price {
+            display: inline-flex;
+            align-items: center;
+            min-height: 40px;
+            padding: 9px 14px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.88);
+            border: 1px solid var(--section-line);
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+        .berry-series-price.owner {
+            color: var(--owner);
+        }
+        .berry-series-price.designer {
+            color: var(--designer);
+        }
         .section-bullets {
             display: flex;
             flex-wrap: wrap;
@@ -523,6 +684,14 @@
             color: var(--ink);
             font-size: 0.98rem;
             letter-spacing: 0.01em;
+        }
+        .series-meta {
+            display: block;
+            margin-top: 4px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #6f6458;
+            letter-spacing: 0;
         }
         .series-price {
             padding: 6px 10px;
@@ -784,7 +953,9 @@
             }
             .insight-grid,
             .policy-grid,
-            .cta-grid {
+            .cta-grid,
+            .brand-story-grid,
+            .berry-series-grid {
                 grid-template-columns: 1fr;
             }
             .service-head {
@@ -883,19 +1054,61 @@
                 </div>
                 <div class="section-region">Balterio</div>
             </div>
-            <p class="section-summary">源自比利時 Balterio 的精品品質，3D 同步壓紋搭配 72 小時潑水測試認證，自然紋理更能呈現高端木質層次，適合重視空間質感與細節完成度的住宅與設計案。</p>
+            <p class="section-summary">源自比利時 Balterio 的精品品質，3D 同步壓紋搭配 72 小時潑水測試認證，自然紋理更能呈現高端木質層次。</p>
+            <div class="brand-story-grid single-story">
+                <div class="brand-story-card centered-story">
+                    <span class="brand-story-kicker">UNILIN Group</span>
+                    <h3 class="brand-story-title">Balterio 背後是 UNILIN 的地板技術體系</h3>
+                    <p class="brand-story-body">核心技術：Uniclic 卡扣系統。UNILIN 的最大貢獻是於 1997 年發明了「UNICLIC 專利卡扣」安裝系統，這是一項革命性的木地板技術。</p>
+                    <p class="brand-story-body" style="margin-top:10px;">特性：接合包覆完整、緊密，不易脫漏，具有極高的穩定性。</p>
+                    <p class="brand-story-body" style="margin-top:10px;">安裝：支援兩種安裝方式（推扣與角度旋入），安裝簡單快速。</p>
+                    <p class="brand-story-body" style="margin-top:10px;">影響：它是業界最受歡迎的專利技術之一，許多知名廠牌都授權使用此技術。</p>
+                </div>
+            </div>
             <div class="section-bullets">
                 <span class="bullet-chip"><span class="bullet-dot"></span>72 小時潑水測試</span>
                 <span class="bullet-chip"><span class="bullet-dot"></span>3D 同步壓紋</span>
                 <span class="bullet-chip"><span class="bullet-dot"></span>自然木感紋理</span>
             </div>
-            <table>
-                <tr><th>系列 / 規格</th><th>業主價</th><th>設計師</th></tr>
-                <tr><td>活力精選<span class="spec">1261*192*8</span></td><td class="owner">$4,800</td><td class="designer">$3,800</td></tr>
-                <tr><td>活力豪華<span class="spec">1261*192*8</span></td><td class="owner">$5,200</td><td class="designer">$4,000</td></tr>
-                <tr><td>精品系列<span class="spec">1261*192*8</span></td><td class="owner">$5,400</td><td class="designer">$4,200</td></tr>
-                <tr><td>新寬板<span class="spec">1261*244*8</span></td><td class="owner">$5,600</td><td class="designer">$4,700</td></tr>
-            </table>
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">活力新精選系列<span class="series-meta">New Vitality / 1261 x 192 x 8 mm / 72 小時防潑水</span></div>
+                    <div class="series-price">
+                        <span class="owner">業主：$4,800</span> /
+                        <span class="designer">設計師：$3,800</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">活力新豪華系列<span class="series-meta">New Vitality / 1261 x 192 x 8 mm / 3D 同步壓紋 / 72 小時防潑水</span></div>
+                    <div class="series-price">
+                        <span class="owner">業主：$5,200</span> /
+                        <span class="designer">設計師：$4,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">精品系列<span class="series-meta">STYLE / 1261 x 192 x 8 mm / 3D 同步壓紋 / 72 小時防潑水</span></div>
+                    <div class="series-price">
+                        <span class="owner">業主：$5,400</span> /
+                        <span class="designer">設計師：$4,200</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="series-block">
+                <div class="series-title">
+                    <div class="series-name">新寬版系列<span class="series-meta">New Jumbo / 1261 x 244 x 8 mm / 3D 同步壓紋 / 72 小時防潑水</span></div>
+                    <div class="series-price">
+                        <span class="owner">業主：$5,600</span> /
+                        <span class="designer">設計師：$4,700</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="series-block">
                 <div class="series-title">
@@ -929,26 +1142,26 @@
             <p class="section-summary">德國 EGGER 以嚴謹工藝打造多款木紋色系，Aqua 系列提供防水升級，LARGE / LONG 格式展現大板氣勢，Aqua+ 系列更進一步對應高濕環境需求，是商空與住宅提案都很穩定的系列。</p>
             <div class="insight-grid">
                 <div class="insight-card">
-                    <span class="card-tag">Aqua</span>
+                    <span class="card-tag">AQUA</span>
                     <h3 class="insight-title">標準防水核心</h3>
                     <p class="insight-body">超耐磨防水核心，適合一般居家與商業空間，提供多元色系與穩定施工性。</p>
                 </div>
                 <div class="insight-card">
-                    <span class="card-tag">Large / Long</span>
+                    <span class="card-tag">LARGE / LONG</span>
                     <h3 class="insight-title">大板與長板比例</h3>
                     <p class="insight-body">更寬更長的板材比例，視覺延伸效果更強，適合大坪數空間與開放式格局。</p>
                 </div>
                 <div class="insight-card">
-                    <span class="card-tag">Aqua+</span>
+                    <span class="card-tag">AQUA+</span>
                     <h3 class="insight-title">進階防水定位</h3>
                     <p class="insight-body">加強防水配方，適合浴廁過渡區與較潮濕環境，兼顧功能與質感。</p>
                 </div>
             </div>
             <div class="series-block">
                 <div class="series-title">
-                    <div class="series-name">8/32 - 8/33 入門防水系列</div>
+                    <div class="series-name">NatureSense 純粹系列<span class="series-meta">1292 x 193 x 8 mm</span></div>
                     <div class="series-price">
-                        <span class="owner">業主：$5,100</span> /
+                        <span class="owner">建議售價：$5,100</span> /
                         <span class="designer">設計師：$4,200</span>
                     </div>
                 </div>
@@ -956,23 +1169,23 @@
                     <tr><th>型號</th><th>花色</th></tr>
                     <tr><td class="code">EL2154</td><td>洛哈奶油橡木</td></tr>
                     <tr><td class="code">EL2113</td><td>皮諾沙棕橡木</td></tr>
-                    <tr><td class="code">EL2525</td><td>榭菲爾德淺色刺槐</td></tr>
+                    <tr><td class="code">EL2525</td><td>榭菲爾德淺色剌槐</td></tr>
                 </table>
             </div>
 
             <div class="series-block">
                 <div class="series-title">
-                    <div class="series-name">8/32 Aqua 耐磨系列</div>
+                    <div class="series-name">NatureSense Aqua 純粹森潤系列 24H+<span class="series-meta">1292 x 193 x 8 mm</span></div>
                     <div class="series-price">
-                        <span class="owner">業主：$5,100</span> /
+                        <span class="owner">建議售價：$5,100</span> /
                         <span class="designer">設計師：$4,200</span>
                     </div>
                 </div>
                 <table class="detail-table">
                     <tr><th>型號</th><th>花色</th></tr>
-                    <tr><td class="code">EL2064</td><td>索里雅原橡</td></tr>
+                    <tr><td class="code">EL2064</td><td>索里亞原橡</td></tr>
                     <tr><td class="code">EL2065</td><td>索里亞灰橡</td></tr>
-                    <tr><td class="code">EL2070</td><td>萊里淺胡桃木</td></tr>
+                    <tr><td class="code">EL2070</td><td>蘭里淺胡桃木</td></tr>
                     <tr><td class="code">EL2102</td><td>鄧寧頓淺橡</td></tr>
                     <tr><td class="code">EL2103</td><td>鄧寧頓深橡</td></tr>
                     <tr><td class="code">EL2112</td><td>皮諾淺灰橡木</td></tr>
@@ -982,63 +1195,63 @@
 
             <div class="series-block">
                 <div class="series-title">
-                    <div class="series-name">8/32 Aqua 精選系列</div>
+                    <div class="series-name">NatureSense Aqua 純粹森潤系列 24H+ 精選花色<span class="series-meta">1292 x 193 x 8 mm</span></div>
                     <div class="series-price">
-                        <span class="owner">業主：$5,400</span> /
+                        <span class="owner">建議售價：$5,400</span> /
                         <span class="designer">設計師：$4,450</span>
                     </div>
                 </div>
                 <table class="detail-table">
                     <tr><th>型號</th><th>花色</th></tr>
                     <tr><td class="code">EL2180</td><td>特雷維索白橡木</td></tr>
-                    <tr><td class="code">EL2240</td><td>維奧淺色梣木</td></tr>
+                    <tr><td class="code">EL2240</td><td>埃維奧淺色橡梣木</td></tr>
                 </table>
             </div>
 
             <div class="series-block">
                 <div class="series-title">
-                    <div class="series-name">8/32 LARGE Aqua 大板系列</div>
+                    <div class="series-name">NatureSense Large Aqua 寬板森潤系列 24H+<span class="series-meta">1292 x 246 x 8 mm</span></div>
                     <div class="series-price">
-                        <span class="owner">業主：$5,400</span> /
+                        <span class="owner">建議售價：$5,400</span> /
                         <span class="designer">設計師：$4,450</span>
                     </div>
                 </div>
                 <table class="detail-table">
                     <tr><th>型號</th><th>花色</th></tr>
                     <tr><td class="code">EL2026</td><td>維多利亞白色橡木</td></tr>
-                    <tr><td class="code">EL2026</td><td>維多利亞自然橡木</td></tr>
+                    <tr><td class="code">EL2027</td><td>維多利亞自然橡木</td></tr>
                 </table>
             </div>
 
             <div class="series-block">
                 <div class="series-title">
-                    <div class="series-name">10/33 LONG Aqua 長板系列</div>
+                    <div class="series-name">NatureSense Long Aqua 長板森潤系列 24H+<span class="series-meta">2050 x 246 x 10 mm</span></div>
                     <div class="series-price">
-                        <span class="owner">業主：$6,700</span> /
+                        <span class="owner">建議售價：$6,700</span> /
                         <span class="designer">設計師：$5,700</span>
                     </div>
                 </div>
                 <table class="detail-table">
                     <tr><th>型號</th><th>花色</th></tr>
-                    <tr><td class="code">EL2431</td><td>貝福德淺橡</td></tr>
-                    <tr><td class="code">EL2988</td><td>盧埃納沙米</td></tr>
+                    <tr><td class="code">EL2431</td><td>貝弗德淺橡</td></tr>
+                    <tr><td class="code">EL2988</td><td>盧埃納沙米橡</td></tr>
                 </table>
             </div>
 
             <div class="series-block">
                 <div class="series-title">
-                    <div class="series-name">8/32 - 8/33 Aqua+ 進階防水系列</div>
+                    <div class="series-name">NatureSense Aqua+ 純粹極境系列 72H+<span class="series-meta">1292 x 193 x 8 mm</span></div>
                     <div class="series-price">
-                        <span class="owner">業主：$6,100</span> /
+                        <span class="owner">建議售價：$6,100</span> /
                         <span class="designer">設計師：$5,100</span>
                     </div>
                 </div>
                 <table class="detail-table">
                     <tr><th>型號</th><th>花色</th></tr>
                     <tr><td class="code">EL2172</td><td>帕多瓦蜂蜜橡木</td></tr>
-                    <tr><td class="code">EL2181</td><td>雷維索自然橡木</td></tr>
-                    <tr><td class="code">EL2192</td><td>圖鈴深橡木</td></tr>
-                    <tr><td class="code">EL2135</td><td>巴羅尼亞灰橡</td></tr>
+                    <tr><td class="code">EL2181</td><td>特雷維索自然橡木</td></tr>
+                    <tr><td class="code">EL2192</td><td>圖靈深橡木</td></tr>
+                    <tr><td class="code">EL2135</td><td>巴羅尼亞灰橡木</td></tr>
                 </table>
             </div>
         </div>
@@ -1052,11 +1265,11 @@
                 </div>
                 <div class="section-region">Noda / MFB</div>
             </div>
-            <p class="section-summary">諾達以多元鋪設工法著稱，典韻系列寬板大氣、人字拼系列視覺層次豐富；MFB 防水超耐磨無機板則結合防水核心技術與耐磨表層，對台灣潮濕氣候與翻修案都相當友善。</p>
+            <p class="section-summary">諾達適合做寬板與人字拼提案；MFB 防水超耐磨無機板則可作為潮濕氣候、翻修案與高CP值方案的機能型選項。</p>
             <div class="section-bullets">
                 <span class="bullet-chip"><span class="bullet-dot"></span>個性化鋪設工法</span>
                 <span class="bullet-chip"><span class="bullet-dot"></span>寬板與人字拼選擇</span>
-                <span class="bullet-chip"><span class="bullet-dot"></span>高 CP 值防水方案</span>
+                <span class="bullet-chip"><span class="bullet-dot"></span>高CP值方案</span>
             </div>
 
             <div class="series-block">
@@ -1067,7 +1280,7 @@
                     <tr><th>項目</th><th>業主價</th><th>設計師價</th></tr>
                     <tr>
                         <td>典韻系列 (A1501-A1512)<span class="spec">1515 * 238 * 8MM</span></td>
-                        <td class="owner">$3,900</td>
+                        <td class="owner">$4,000</td>
                         <td class="designer">$3,300</td>
                     </tr>
                     <tr>
