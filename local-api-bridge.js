@@ -24,24 +24,34 @@
   const NODA_TABLE_IDS = [
     ["ND-DIANYUN-A1501-A1512", "ND-HERRINGBONE-H201-H206"],
     ["ND-ACC-START-STOP", "ND-ACC-TMOLD", "ND-ACC-STAIR"],
-    ["MFB-BOARD-01", "MFB-ACC-START-STOP"],
   ];
+  const MFB_TABLE_IDS = [["MFB-BOARD-01", "MFB-ACC-START-STOP"]];
+
+  function isFiniteNumber(value) {
+    return Number.isFinite(Number(value));
+  }
 
   function ownerPrice(product) {
     if (!product) return null;
-    if (product.pricing && Number.isFinite(Number(product.pricing.owner))) return Number(product.pricing.owner);
-    if (Number.isFinite(Number(product.price))) return Number(product.price);
+    if (product.pricing && isFiniteNumber(product.pricing.owner)) return Number(product.pricing.owner);
+    if (isFiniteNumber(product.price)) return Number(product.price);
     return null;
   }
 
   function designerPrice(product) {
     if (!product || !product.pricing) return null;
-    if (Number.isFinite(Number(product.pricing.designer))) return Number(product.pricing.designer);
+    if (isFiniteNumber(product.pricing.designer)) return Number(product.pricing.designer);
     return null;
   }
 
+  function productIsActive(product) {
+    if (!product) return false;
+    const status = String(product.status || "active").toLowerCase();
+    return status !== "inactive";
+  }
+
   function formatPrice(value) {
-    if (!Number.isFinite(Number(value))) return "";
+    if (!isFiniteNumber(value)) return "";
     return `$${Number(value).toLocaleString("en-US")}`;
   }
 
@@ -54,6 +64,30 @@
     return `${y} / ${m} / ${d}`;
   }
 
+  function formatMillimeter(value) {
+    if (!isFiniteNumber(value)) return null;
+    const n = Number(value);
+    return Number.isInteger(n) ? String(n) : String(n);
+  }
+
+  function buildSpecText(product) {
+    if (!product || !product.specs) return "";
+    const length = formatMillimeter(product.specs.length_mm);
+    const width = formatMillimeter(product.specs.width_mm);
+    const thickness = formatMillimeter(product.specs.thickness_mm);
+    if (!length || !width || !thickness) return "";
+    return `${length} x ${width} x ${thickness} mm`;
+  }
+
+  function buildSeriesMetaText(product) {
+    const parts = [];
+    const series = String(product?.series || "").trim();
+    const spec = buildSpecText(product);
+    if (series) parts.push(series);
+    if (spec) parts.push(spec);
+    return parts.join(" / ");
+  }
+
   function replaceFirstPrice(text, value) {
     const next = formatPrice(value);
     if (!next) return text;
@@ -63,8 +97,39 @@
     return next;
   }
 
+  function setHidden(node, hidden) {
+    if (!node) return;
+    node.style.display = hidden ? "none" : "";
+  }
+
+  function setFirstTextKeepingChildren(container, text) {
+    if (!container || !text) return;
+    let textNode = null;
+    for (const node of container.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        textNode = node;
+        break;
+      }
+    }
+    if (textNode) {
+      textNode.textContent = text;
+      return;
+    }
+    container.insertBefore(document.createTextNode(text), container.firstChild || null);
+  }
+
+  function ensureSpecNode(container) {
+    let specNode = container ? container.querySelector(".spec") : null;
+    if (!specNode && container) {
+      specNode = document.createElement("span");
+      specNode.className = "spec";
+      container.appendChild(specNode);
+    }
+    return specNode;
+  }
+
   function setCellPrice(cell, value) {
-    if (!cell || !Number.isFinite(Number(value))) return;
+    if (!cell || !isFiniteNumber(value)) return;
     cell.textContent = formatPrice(value);
   }
 
@@ -73,7 +138,7 @@
     const cells = row.querySelectorAll("td");
     if (cells.length < 2) return;
     setCellPrice(cells[1], owner);
-    if (cells.length >= 3 && Number.isFinite(Number(designer))) {
+    if (cells.length >= 3 && isFiniteNumber(designer)) {
       setCellPrice(cells[2], designer);
     }
   }
@@ -83,24 +148,80 @@
     const ownerNode = box.querySelector(".owner");
     const designerNode = box.querySelector(".designer");
 
-    if (ownerNode && Number.isFinite(Number(owner))) {
+    if (ownerNode && isFiniteNumber(owner)) {
       ownerNode.textContent = replaceFirstPrice(ownerNode.textContent, owner);
     }
-    if (designerNode && Number.isFinite(Number(designer))) {
+    if (designerNode && isFiniteNumber(designer)) {
       designerNode.textContent = replaceFirstPrice(designerNode.textContent, designer);
     }
+  }
+
+  function setSeriesBlockData(block, product) {
+    const active = productIsActive(product);
+    setHidden(block, !active);
+    if (!active) return;
+
+    const titleNode = block.querySelector(".series-name");
+    const metaNode = block.querySelector(".series-meta");
+    const priceBox = block.querySelector(".series-price");
+
+    const name = String(product.name || "").trim();
+    if (name && titleNode) {
+      setFirstTextKeepingChildren(titleNode, name);
+    }
+
+    const metaText = buildSeriesMetaText(product);
+    if (metaNode && metaText) {
+      metaNode.textContent = metaText;
+    } else if (titleNode && metaText && !metaNode) {
+      const appendedMeta = document.createElement("span");
+      appendedMeta.className = "series-meta";
+      appendedMeta.textContent = metaText;
+      titleNode.appendChild(appendedMeta);
+    }
+
+    setPriceSpans(priceBox, ownerPrice(product), designerPrice(product));
+  }
+
+  function setTableRowData(row, product) {
+    const active = productIsActive(product);
+    setHidden(row, !active);
+    if (!active) return false;
+
+    const firstCell = row.querySelector("td");
+    if (firstCell) {
+      const name = String(product.name || "").trim();
+      if (name) setFirstTextKeepingChildren(firstCell, name);
+
+      const specText = buildSpecText(product);
+      const existingSpec = firstCell.querySelector(".spec");
+      if (specText) {
+        const specNode = existingSpec || ensureSpecNode(firstCell);
+        if (specNode) specNode.textContent = specText;
+      } else if (existingSpec) {
+        existingSpec.remove();
+      }
+    }
+
+    setRowPrice(row, ownerPrice(product), designerPrice(product));
+    return true;
   }
 
   function updateMetaDate(lastUpdatedAt) {
     const dateText = formatDate(lastUpdatedAt);
     if (!dateText) return;
-    const chips = document.querySelectorAll(".hero-meta .meta-chip");
-    for (const chip of chips) {
-      if (chip.textContent.includes("更新")) {
-        chip.textContent = `${dateText} 更新`;
-        break;
-      }
+
+    const chips = Array.from(document.querySelectorAll(".hero-meta .meta-chip"));
+    if (!chips.length) return;
+
+    let target = chips.find((chip) => /\d{4}\s*\/\s*\d{2}\s*\/\s*\d{2}/u.test(chip.textContent));
+    if (!target && chips.length >= 3) {
+      target = chips[2];
     }
+    if (!target) return;
+
+    const suffix = target.textContent.replace(/\d{4}\s*\/\s*\d{2}\s*\/\s*\d{2}/u, "").trim();
+    target.textContent = suffix ? `${dateText} ${suffix}` : dateText;
   }
 
   function updateBrandLinks(brandMap) {
@@ -122,36 +243,67 @@
     const section = document.querySelector(".section-berry");
     if (!section) return;
 
-    const mainTable = section.querySelector("table");
-    const rows = mainTable ? Array.from(mainTable.querySelectorAll("tr")).slice(1) : [];
+    const blocks = Array.from(section.querySelectorAll(".series-block")).slice(0, BALTERIO_IDS.length);
     BALTERIO_IDS.forEach((id, index) => {
+      const block = blocks[index];
+      if (!block) return;
       const product = productsById.get(id);
-      if (!product) return;
-      setRowPrice(rows[index], ownerPrice(product), designerPrice(product));
+      setSeriesBlockData(block, product);
     });
   }
 
   function updateEgger(productsById) {
-    const priceBoxes = document.querySelectorAll(".section-egger .series-block .series-price");
+    const section = document.querySelector(".section-egger");
+    if (!section) return;
+
+    const blocks = Array.from(section.querySelectorAll(".series-block")).slice(0, EGGER_IDS.length);
     EGGER_IDS.forEach((id, index) => {
+      const block = blocks[index];
+      if (!block) return;
       const product = productsById.get(id);
-      if (!product) return;
-      setPriceSpans(priceBoxes[index], ownerPrice(product), designerPrice(product));
+      setSeriesBlockData(block, product);
     });
   }
 
-  function updateNodaAndMfb(productsById) {
-    const blocks = document.querySelectorAll(".section-noda .series-block");
-    NODA_TABLE_IDS.forEach((idList, blockIndex) => {
+  function updateTableSection(sectionSelector, tableIdGroups, productsById) {
+    const section = document.querySelector(sectionSelector);
+    if (!section) return;
+
+    const blocks = section.querySelectorAll(".series-block");
+    let sectionActiveCount = 0;
+
+    tableIdGroups.forEach((idList, blockIndex) => {
       const block = blocks[blockIndex];
-      const table = block ? block.querySelector("table") : null;
+      if (!block) return;
+      const table = block.querySelector("table");
       const rows = table ? Array.from(table.querySelectorAll("tr")).slice(1) : [];
+
+      let activeCount = 0;
       idList.forEach((id, rowIndex) => {
+        const row = rows[rowIndex];
+        if (!row) return;
         const product = productsById.get(id);
-        if (!product) return;
-        setRowPrice(rows[rowIndex], ownerPrice(product), designerPrice(product));
+        if (setTableRowData(row, product)) activeCount += 1;
       });
+
+      setHidden(block, activeCount === 0);
+      if (activeCount > 0) sectionActiveCount += 1;
     });
+
+    setHidden(section, sectionActiveCount === 0);
+  }
+
+  function updateNoda(productsById) {
+    updateTableSection(".section-noda", NODA_TABLE_IDS, productsById);
+  }
+
+  function updateMfb(productsById) {
+    updateTableSection(".section-mfb", MFB_TABLE_IDS, productsById);
+  }
+
+  function updateNodaAndMfb(productsById) {
+    updateNoda(productsById);
+    updateMfb(productsById);
   }
 
   function buildMaps(payload) {
